@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <title>过滤器</title>
     <script src="../js/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 </head>
 <body>
 <div id="app">
     <h2>显示格式化的日期时间</h2>
     <p>{{date}}</p>
     <p>完整版：{{date | dateStr}}</p>
+    <p>年月日：{{date | dateStr('YYYY-MM-DD')}}</p>
+    <p>时分秒：{{date | dateStr('HH:mm:ss')}}</p>
 </div>
 </body>
 <script>
     //自定义过滤器
     //Vue作为函数对象使用filter方法
-    Vue.filter('dateStr',function (value) {
+    Vue.filter('dateStr', function (value, format) {
+        return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss');
     })
 
     new Vue({
