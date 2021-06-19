@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<!--
+1.条件渲染指令
+  v-if  //隐藏的时候会将元素移除，再次显示的时候需要再次创建元素
+  v-else
+  v-show    //仅仅是使用display：none来隐藏
+2.比较v-if和v-show
+  如果需要频繁切换v-show较好
+-->
+
+<div id="app">
+    <p v-if="ok">成功</p>
+    <p v-else>失败</p>
+
+    <p v-show="ok">表白成功</p>
+    <p v-show="!ok">表白失败</p>
+
+    <button @click="ok=!ok">切换</button>
+</div>
+</body>
+<script>
+    const vm = new Vue({
+        el:'#app',
+        data:{
+            ok:true
+        },
+        computed:{
+
+        },
+        methods:{
+
+        }
+    })
+</script>
+</html>

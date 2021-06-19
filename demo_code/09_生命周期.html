@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<!--定时器setInterval无法自动销毁-->
+<!--
+1.vue对象的生命周期
+    1).初始化显示
+        *beforeCreate()
+        *create()
+        *beforeMount()
+        *mounted()
+
+    2).更新显示
+        *beforeUpdate()
+        *update()
+
+    3).销毁vue实例：vm.$destroy
+        *beforeDestroy()
+        *destroy()
+
+2. 常用的生命周期方法：
+    created():[不常用了]
+    mounted(): 发送ajax请求，启动定时器等异步任务
+    beforeDestroy():做收尾工作，如：清除定时器
+-->
+
+<div id="app">
+    <button @click="destroyVM">destroy vm</button>
+    <p v-show="isShow">123456789</p>
+</div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            isShow: true
+        },
+        //1. 初始阶段
+        beforeCreate() {
+            console.log('beforeCreate()')
+        },
+        create() {
+            console.log('create()')
+        },
+        beforeMount() {
+            console.log('beforeMount()')
+        },
+
+        //方式1[vue3无效]：beforeDestroy
+        // mounted() { //初始化显示之后立即调用
+        //     //只要是回调函数，就使用箭头函数
+        //     this.intervalID = setInterval(() => {
+        //         console.log('--------------')
+        //         this.isShow = !this.isShow
+        //     }, 1000);
+        //     // this.$once('hook:beforeDestroy',()=>{
+        //     //     clearInterval(intervalID)
+        //     //     intervalID = null
+        //     // })
+        // },
+        // beforeDestroy() {
+        //     //清除定时器
+        //     clearInterval(this.intervalID)
+        // },
+
+        //方法2[主用方法]：this.$once()
+        mounted() { //初始化显示之后立即调用
+            console.log('mounted()')
+            //只要是回调函数，就使用箭头函数
+            let intervalID = setInterval(() => {
+                console.log('--------------')
+                this.isShow = !this.isShow
+            }, 1000);
+            this.$once('hook:beforeDestroy', () => {
+                clearInterval(intervalID)
+                intervalID = null
+            })
+        },
+        //2. 更新阶段
+        beforeUpdate() {
+            console.log('beforeUpdate()')
+        },
+        updated() {
+            console.log('updated()')
+        },
+
+        //3. 死亡阶段
+        beforeDestroy() {
+            console.log('beforeDestroy()')
+        },
+        destroy() {
+            console.log('destroy()')
+        },
+
+        methods: {
+            destroyVM() {
+                //销毁VM
+                this.$destroy()
+            }
+        },
+    })
+</script>
+</html>

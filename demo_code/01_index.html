@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>起步</title>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    <br>
+    {{ message.toUpperCase() }}
+    <p v-html="message">{{message}}</p>
+    <p v-text="message">123123123</p>
+
+<!--    强制绑定原本的写法-->
+<!--    <img v-bind:src="imgUrl" alt="">-->
+<!--    强制绑定更新后写法-->
+    <img :src="imgUrl" alt="">
+
+
+<!--    添加js原本的写法-->
+<!--    <button v-on:click="test">test1</button>-->
+<!--    更新后的简写-->
+    <button @click="test">test1</button>
+    <button @click="test1(message)">test1</button>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: '<a href="https://www.baidu.com/">hello vue</a>',
+            imgUrl: 'https://cn.vuejs.org/images/logo.png'
+        },
+        methods: {
+            test() {
+                alert('init')
+            },
+            test1(arg){
+                alert(arg)
+            }
+        }
+    })
+</script>
+</html>

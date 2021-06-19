@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>显示格式化的日期时间</h2>
+    <p>{{date}}</p>
+    <p>完整版：{{date | dateStr}}</p>
+</div>
+</body>
+<script>
+    //自定义过滤器
+    //Vue作为函数对象使用filter方法
+    Vue.filter('dateStr',function (value) {
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            date: new Date()
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<!--
+1. 在select>option中，select标签中v-model自动绑定option中的value值，如果没有value则是option标签内的内容
+-->
+
+<div id="app">
+    <form action="/xxx" @submit.prevent="handleSubmit">
+        <span>用户名</span>
+        <input type="text" v-model="username">
+        <br>
+
+        <span>密码</span>
+        <input type="text" v-model="pwd"><br>
+
+        <span>性别</span>
+        <label><input type="radio" name="sex" value="female" v-model="sex">女</label>
+        <label><input type="radio" name="sex" value="man" v-model="sex">男</label>
+
+        <br>
+        <span>爱好:</span>
+        <label>
+            <input type="checkbox" name="hobby" value="basketball" v-model="likes">篮球
+        </label>
+        <label>
+            <input type="checkbox" name="hobby" value="football" v-model="likes">足球
+        </label>
+        <label>
+            <input type="checkbox" name="hobby" value="table" v-model="likes">乒乓
+        </label>
+
+        <br>
+        <span>城市</span>
+        <select name="city" id="city" v-model="cityId">
+            <option value="" style="display: none">未选择</option>
+            <option v-for="(city,index) in allcitys" :key="index" :value="city.id"><!--当如果想要使用vue框架里的属性的时候（想value想要调成allcitys中的id时），在该属性前面添加":"-->
+                {{city.name}}
+            </option>
+        </select>
+        <br>
+
+        <span>介绍</span>
+        <textarea name="" id="" cols="30" rows="10" v-model="des"></textarea>
+
+        <br>
+
+        <input type="submit" value="注册" >
+
+    </form>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            username:'',
+            pwd:'',
+            sex:'man',
+            likes:[],
+            allcitys:[
+                {id:1,name:'BJ'},
+                {id:2,name:'SH'},
+                {id:3,name:'GD'}
+            ],
+            cityId:'',
+            des:''
+        },
+        methods:{
+            handleSubmit(){
+                console.log(this.username,this.pwd,this.sex,this.likes,this.cityId,this.des)
+            }
+        }
+    })
+</script>
+</html>

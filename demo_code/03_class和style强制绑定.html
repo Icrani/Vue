@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .aClass {
+            color: blue;
+        }
+
+        .bClass {
+            background: red;
+        }
+
+        .cClass {
+            background: aqua;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+<!--    //强制绑定class-->
+    <p :class="dClass">XXX是字符串</p>
+    <p :class="{aClass:isA,bClass:isB}">XXX是对象</p>
+    <p :class="['aClass','cClass']">XXX是数组</p>
+    <p :class="classObject">XXX是数组</p>
+
+<!--    强制绑定style-->
+    <p :style="{color:activeColor,fontsize:fontSize+'px'}">强制绑定style</p>
+
+    <button @click="update">更新</button>
+
+</div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            isA: true,
+            isB: true,
+            dClass: 'cClass',
+            activeColor: 'red',
+            fontsize: 60
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isA && !this.isB,
+                    'text_danger': this.isB
+                }
+            },
+
+        },
+        methods: {
+            update() {
+                this.isA = false
+                this.activeColor = 'green'
+                this.fontsize = 40
+            }
+        }
+
+    })
+</script>
+</html>

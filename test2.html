@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BFC</title>
+    <style>
+        .container {
+            /*触发BFC*/
+            overflow: hidden;
+        }
+
+        .cube {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            margin: 100px;
+        }
+
+
+        .foa {
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        .cod{
+            width: 100px;
+            height: 100px;
+            background: blue;
+            float: left;
+        }
+
+        .floatDiv{
+            width: 100px;
+            height: 100px;
+            background: #006677;
+            float: left;
+        }
+        .normalDiv{
+            width: 200px;
+            height: 200px;
+            background: red;
+            /*浮动元素不受影响*/
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <div class="container">
+        <div class="cube"></div>
+    </div>
+    <div class="container">
+        <div class="cube"></div>
+    </div>
+
+</div>
+
+<div>
+    <div class="foa">
+        <div class="cod"></div>
+    </div>
+</div>
+
+<div>
+    <div class="floatDiv"></div>
+    <div class="normalDiv"></div>
+</div>
+
+</body>
+</html>

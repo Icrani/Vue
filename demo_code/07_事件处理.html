@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<!--
+1. 阻止事件冒泡 stop
+2. 阻止事件的默认行为 prevent
+3. 按键修饰符： 键名(enter，space) keyCode
+-->
+<div id="app">
+  <h2>1. 绑定监听</h2>
+  <button v-on:click="test1">test1</button>
+  <button @click="test2('argument1')">test2</button>
+  <button @click="test3">test3</button>
+  <button @click="test4(123,$event)">test4</button>
+
+
+
+  <h2>2. 事件修饰符</h2>
+  <div style="width: 200px;height: 200px;background: red" @click="test5">
+    <div style="width: 100px;height: 100px;background: blue" @click.stop="test6"></div> <!--阻止事件冒泡 stop-->
+  </div>
+
+  <a href="http://www.baidu.com" @click.prevent="test7">去百度</a> <!--阻止事件的默认行为 prevent-->
+
+
+
+  <h2>3. 按键修饰符</h2>
+  <input type="text" @keyup.enter="test8">
+  <input type="text" @keyup.13="test8">
+  <input type="text" @keyup.tab="test8">
+
+
+</div>
+</body>
+<script>
+  new Vue({
+    el:'#app',
+    data:{
+      test1(){
+        // alert(11)
+      },
+      test2(arg){
+        // alert(arg)
+      },
+      test3(event){ //当没有指定参数的时候，会自动传参$event，可以直接调用event
+        console.log(event.target.innerHTML)
+      },
+      test4(num,event){
+        console.log(num+event.target.innerHTML)
+      },
+      test5(){
+        alert('out')
+      },
+      test6(/*event*/){
+        // event.stopPropagation() //原生js写法
+        alert('inner')
+      },
+      test7(){
+        alert("去百度了")
+      },
+      test8(event){
+        // if (event.keyCode ===13)
+        //   alert(event.target.value)
+        alert(event.target.value)
+      }
+
+    }
+  })
+</script>
+</html>
