@@ -22,6 +22,11 @@
         return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss');
     })
 
+    //ES6语法
+    // Vue.filter('dateStr', function (value, format='YYYY-MM-DD HH:mm:ss') {
+    //     return moment(value).format(format);
+    // })
+
     new Vue({
         el: '#app',
         data: {
