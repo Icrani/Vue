@@ -23,4 +23,6 @@ vue的插件库
             console.log('vue实例对象的方法$myMethod()')
         }
     }
+    //向外暴露
+    window.MyPlugin = MyPlugin
 })()
